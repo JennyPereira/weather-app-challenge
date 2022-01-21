@@ -85,16 +85,16 @@ const setImageMain = (state_name) => {
         const imgWeatherState2 = document.createElement("IMG");
         divWeather.setAttribute("class","weather-main__states");
         imgWeatherState1.setAttribute("class", "weather-main__state__image");
-        imgWeatherState1.setAttribute("src", "../images/HeavyCloud.png");
+        imgWeatherState1.setAttribute("src", "images/HeavyCloud.png");
         imgWeatherState2.setAttribute("class", "weather-main__state__image2");
-        imgWeatherState2.setAttribute("src", "../images/HeavyCloud.png");
+        imgWeatherState2.setAttribute("src", "images/HeavyCloud.png");
 
         fragment.appendChild(imgWeatherState1);
         fragment.appendChild(imgWeatherState2);
         divWeather.appendChild(fragment);
         main_clouds.appendChild(divWeather);
     }else{
-        imgWeather_state.setAttribute("src",`../images/${state_name}.png`);
+        imgWeather_state.setAttribute("src",`images/${state_name}.png`);
         main_clouds.appendChild(imgWeather_state);
     }
 }
@@ -136,6 +136,7 @@ const searchLocation = async () =>{
         let urlCity = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${city}`;
         let APIweather = await axios.get(urlCity);
         
+        closeNav();
         if (APIweather.data[0]) {
             let latitude = APIweather.data[0].latt_long.split(",")[0];
             let longitude = APIweather.data[0].latt_long.split(",")[1];
@@ -154,7 +155,6 @@ const searchLocation = async () =>{
                 const weekly_weather = document.querySelector(".weekly-information-weather");
                 weekly_weather.removeChild(document.querySelector(".weekly-weather__box"));    
             }
-            closeNav();
 
             const weatherApi = await urlWeatherAPI(latitude, longitude);
             weatherQueryToday(weatherApi);

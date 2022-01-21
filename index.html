@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/normalize.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    
+    <title>Wheater app</title>
+</head>
+<body>
+    <div class="container">
+        <div class="container-main">
+            <header class="weather-header">
+                <nav class="weather-header__nav">
+                    <span class="material-icons weather-header__icnClse" onclick="closeNav()">close</span>
+                    <div class="weather-header__searchBox">
+                        <i class="material-icons">search</i>
+                        <input type="text" name="search" placeholder="search location" id="search_location" required>
+                        <span class="material-icons error-search">error_outline</span>
+                        <button class="weather-header__btnSearch" type="button" onclick="searchLocation()">Search</button>
+                        <span class="error-message">Not found</span>
+                    </div>
+                    
+                    <ul class="weather-header__ul">
+                        <li class="weather-header__li" onclick="optionSearch(this)" value="London"><a>
+                            London <i class="material-icons">navigate_next</i></a></li>
+                        <li class="weather-header__li" onclick="optionSearch(this)" value="Barcelona"><a>
+                            Barcelona <i class="material-icons">navigate_next</i></a></li>
+                        <li class="weather-header__li" onclick="optionSearch(this)" value="Long Beach"><a>
+                            Long Beach <i class="material-icons">navigate_next</i></a></li>
+                    </ul>
+                </nav>
+                <button class="weather-header__button" type="button" onclick="openNav()">Search for places </button>
+                <span class="material-icons weather-header__icon">my_location</span>
+                
+            </header>
+            <main class="weather-main">
+                <div class="weather-main__clouds">
+                    <img class="weather-main__image-cloud1" src="images/Cloud-background-1.png">
+                    <img class="weather-main__image-cloud2" src="images/Cloud-background-2.png">
+                </div>
+                <div class="weather-information-today">
+                    <h1 class="weather-information-today__heading">15</h1>
+                    <p class="weather-information-today__prgraph">Shower</p>
+                    <div class="weather-information-today__date">
+                        <p>Today</p>
+                        <p>·</p>
+                        <p class="weather-information-today__day-actual">Fri, 5 Jun</p>
+                    </div>
+                    <div class="weather-information__place">
+                        <span class="weather-information__icon material-icons md-dark">room</span>
+                        <p class="weather-information__place-actual">Helsinki</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div class="weekly-information">
+            <div class="weekly-information-weather">
+            </div>
+            <section class="todays-hightlights">
+                <h2 class="todays-hightlights__title">Today’s Hightlights</h2>
+                <div class="todays-hightlights__box">
+                    <p class="todays-hightlights__box__titleDescript">Wind status</p>
+                    <p class="todays-hightlights__box__value todays-hightlights__box__value-wind">7<b>mph</b></p>
+                    <div class="todays-hightlights__box__graphicDesc">
+                        <span class="material-icons todays-hightlights__box__measuCont__icon">play_arrow</span>
+                        <p>WSW</p>
+                    </div>
+                </div>
+                <div class="todays-hightlights__box">
+                    <p class="todays-hightlights__box__titleDescript">Humidity</p>
+                    <p class="todays-hightlights__box__value todays-hightlights__box__value-humidity">84<b>%</b></p>
+                    <div class="todays-hightlights__box__graphicDesc-termom">
+                        <p>0 <b>50</b> <b>100</b> </p>
+                        <div class="todays-hightlights__box__graphicDesc__termom">
+                            <div class="todays-hightlights__box__graphicDesc__termom__porct"></div>
+                        </div>
+                        <p class="todays-hightlights__box__graphicDesc__percent">%</p>
+                    </div>
+                </div>
+                <div class="todays-hightlights__box">
+                    <p class="todays-hightlights__box__titleDescript">Visibility</p>
+                    <p class="todays-hightlights__box__value todays-hightlights__box__value-visibility">6,4 <b>miles</b></p>
+                </div>
+                <div class="todays-hightlights__box">
+                    <p class="todays-hightlights__box__titleDescript">Air Pressure</p>
+                    <p class="todays-hightlights__box__value todays-hightlights__box__value-airPres">998 <b>mb</b> </p>
+                </div>
+            </section>
+            <footer>created by <u><a href="https://devchallenges.io/portfolio/JennyPereira">JennyPereira</a></u> - devChallenges.io</footer>
+        </aside>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="logic/logic-sytle.js"></script>
+    <script src="logic/logic-location.js"></script>
+    <script type="module" src="logic/logic-eventList.js"></script>
+    <script type="module" src="logic/components/weeklyWeather.component.js"></script>
+    <script src="logic/logic-defaultWeather.js"></script>
+    <script src="logic/logic-others.js"></script>
+</body>
+</html>

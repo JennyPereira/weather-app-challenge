@@ -1,0 +1,6 @@
+projectKey=WeatherChallenge
+serverUrl=http://localhost:9000
+serverVersion=9.2.4.50792
+dashboardUrl=http://localhost:9000/dashboard?id=WeatherChallenge
+ceTaskId=AX5vg1anbXjEEGnABL9K
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AX5vg1anbXjEEGnABL9K

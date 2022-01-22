@@ -1,11 +1,11 @@
 function closeNav(){
     document.querySelector(".weather-header__nav").style.display = "none";
 
-    /*const mq = matchMedia("(min-width: 1025px)");
+    const mq = matchMedia("(min-width: 1025px)");
     if (!mq.matches) {
         document.querySelector(".weather-main").style.display = "block";
         document.querySelector(".weekly-information").style.display = "block";
-    }*/
+    }
 }
 
 function openNav(){
@@ -40,4 +40,15 @@ async function closeLoader(){
     document.querySelector(".weather-main").style.display = "block";
     document.querySelector(".weekly-information").style.display = "block";
     closeNav();
+}
+
+function errorHidden () {
+    const erroMessage = document.querySelector(".error-message");
+    errorVisible = erroMessage.getAttribute("style");
+    if (errorVisible) {
+        const iconError = document.querySelector('.error-search');
+        
+        iconError.style.visibility = 'hidden';
+        erroMessage.style.visibility = 'hidden';
+    }
 }

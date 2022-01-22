@@ -13,7 +13,7 @@ const geoError = async (error) =>{
 }
 
 const locationQuery = async (lat, long) => {
-    let urlLocation = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?lattlong=${lat},${long}`;
+    let urlLocation = `https://www.metaweather.com/api/location/search/?lattlong=${lat},${long}`;
     let APIlocation = await axios.get(`${urlLocation}`);
     let woeid = APIlocation.data[0].woeid;
 
@@ -21,7 +21,7 @@ const locationQuery = async (lat, long) => {
     
     document.querySelector(".weather-information__place-actual").innerHTML = title_location;
     //console.log(`Country: ${title_location} IDLocation: ${woeid}, Link: ${urlLocation}`);
-    return `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}`;
+    return `https://www.metaweather.com/api/location/${woeid}`;
 }
 
 const urlWeatherAPI = async (lat, long) => {
@@ -131,34 +131,24 @@ const todaysHightlights = (APIweather) => {
 }
 
 const searchLocation = async () =>{
-    openLoader();
     let city = document.getElementById("search_location").value;
     
     if (city!=="") {
-        let urlCity = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${city}`;
+        let urlCity = `https://www.metaweather.com/api/location/search/?query=${city}`;
         let APIweather = await axios.get(urlCity);
         
         if (APIweather.data[0]) {
+            openLoader();
             let latitude = APIweather.data[0].latt_long.split(",")[0];
             let longitude = APIweather.data[0].latt_long.split(",")[1];
-            
-            const weather_main = document.querySelector(".weather-main__clouds");
 
-            /*If the image exists, so delete it*/
-            if (document.querySelector(".weather-main__image-center")) {
-                weather_main.removeChild(document.querySelector(".weather-main__image-center"));
-            } else {
-                weather_main.removeChild(document.querySelector(".weather-main__states"));
-            }
-            
-
-            for (let i = 0; i < 5; i++) {
-                const weekly_weather = document.querySelector(".weekly-information-weather");
-                weekly_weather.removeChild(document.querySelector(".weekly-weather__box"));    
-            }
+            await deleteBoxsPrevious();
 
             const weatherApi = await urlWeatherAPI(latitude, longitude);
             weatherQueryToday(weatherApi);
+            const inputLocation = document.getElementById('search_location');
+            inputLocation.value = "";
+            errorHidden();
         } else {
             const iconError = document.querySelector('.error-search');
             const msgError = document.querySelector('.error-message');
@@ -166,14 +156,37 @@ const searchLocation = async () =>{
             iconError.style.visibility = 'visible';
             msgError.style.visibility = 'visible';
         }
+        
     }
     
+}
+
+async function deleteBoxsPrevious(){
+    const weather_main = document.querySelector(".weather-main__clouds");
+    /*If the image exists, so delete it*/
+    if (document.querySelector(".weather-main__image-center")) {
+        weather_main.removeChild(document.querySelector(".weather-main__image-center"));
+    } else {
+        weather_main.removeChild(document.querySelector(".weather-main__states"));
+    }
+    
+
+    for (let i = 0; i < 5; i++) {
+        const weekly_weather = document.querySelector(".weekly-information-weather");
+        weekly_weather.removeChild(document.querySelector(".weekly-weather__box"));    
+    }
 }
 
 const optionSearch = (value) =>{
     const inputLocation = document.getElementById('search_location');
     inputLocation.value = value.attributes[2].value;
     searchLocation();
+}
+
+async function weatherlocation(){
+    openLoader();
+    geolocation.getCurrentPosition(position, geoError);
+    await deleteBoxsPrevious();
 }
 
 geolocation.getCurrentPosition(position, geoError);

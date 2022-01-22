@@ -56,6 +56,7 @@ const weatherQueryToday = async (urlLocation) =>{
     }
 
     todaysHightlights(APIweather);
+    await closeLoader();
 
     /* weather APP */
     document.querySelector(".weather-information-today__prgraph").innerHTML = state_name;
@@ -130,13 +131,13 @@ const todaysHightlights = (APIweather) => {
 }
 
 const searchLocation = async () =>{
+    openLoader();
     let city = document.getElementById("search_location").value;
     
     if (city!=="") {
         let urlCity = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${city}`;
         let APIweather = await axios.get(urlCity);
         
-        closeNav();
         if (APIweather.data[0]) {
             let latitude = APIweather.data[0].latt_long.split(",")[0];
             let longitude = APIweather.data[0].latt_long.split(",")[1];
@@ -176,3 +177,4 @@ const optionSearch = (value) =>{
 }
 
 geolocation.getCurrentPosition(position, geoError);
+openLoader();

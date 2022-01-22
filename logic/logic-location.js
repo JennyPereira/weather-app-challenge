@@ -13,7 +13,7 @@ const geoError = async (error) =>{
 }
 
 const locationQuery = async (lat, long) => {
-    let urlLocation = `https://www.metaweather.com/api/location/search/?lattlong=${lat},${long}`;
+    let urlLocation = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?lattlong=${lat},${long}`;
     let APIlocation = await axios.get(`${urlLocation}`);
     let woeid = APIlocation.data[0].woeid;
 
@@ -21,7 +21,7 @@ const locationQuery = async (lat, long) => {
     
     document.querySelector(".weather-information__place-actual").innerHTML = title_location;
     //console.log(`Country: ${title_location} IDLocation: ${woeid}, Link: ${urlLocation}`);
-    return `https://www.metaweather.com/api/location/${woeid}`;
+    return `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}`;
 }
 
 const urlWeatherAPI = async (lat, long) => {
@@ -134,7 +134,7 @@ const searchLocation = async () =>{
     let city = document.getElementById("search_location").value;
     
     if (city!=="") {
-        let urlCity = `https://www.metaweather.com/api/location/search/?query=${city}`;
+        let urlCity = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${city}`;
         let APIweather = await axios.get(urlCity);
         
         if (APIweather.data[0]) {
